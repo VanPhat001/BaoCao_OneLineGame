@@ -38,3 +38,23 @@ C:\Users\Admin\Desktop\New folder\OneLineGameProject\BaoCao\obj\Debug\BaoCao.csp
 C:\Users\Admin\Desktop\New folder\OneLineGameProject\BaoCao\obj\Debug\BaoCao.csproj.CoreCompileInputs.cache
 C:\Users\Admin\Desktop\New folder\OneLineGameProject\BaoCao\obj\Debug\BaoCao.exe
 C:\Users\Admin\Desktop\New folder\OneLineGameProject\BaoCao\obj\Debug\BaoCao.pdb
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\bin\Debug\BaoCao.exe.config
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\bin\Debug\BaoCao.exe
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\bin\Debug\BaoCao.pdb
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\BaoCao.csproj.AssemblyReference.cache
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\BaoCao.csproj.SuggestedBindingRedirects.cache
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\MainWindow.g.cs
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\PlayBoardWindow.g.cs
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\SettingWindow.g.cs
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\App.g.cs
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\BaoCao_MarkupCompile.cache
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\BaoCao_MarkupCompile.lref
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\MainWindow.baml
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\PlayBoardWindow.baml
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\SettingWindow.baml
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\BaoCao.g.resources
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\BaoCao.Properties.Resources.resources
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\BaoCao.csproj.GenerateResource.cache
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\BaoCao.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\BaoCao.exe
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\BaoCao.pdb

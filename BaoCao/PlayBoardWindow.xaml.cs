@@ -194,12 +194,12 @@ namespace BaoCao
 
                         if (SelectedEdge != null)
                         {
-                            SelectedEdge.EdgeColor = Constants.EdgeColorPlay;                            
+                            SelectedEdge.EdgeColor = Constants.EdgeColorPlay;
+                            if (IsDesignMode)
+                            {
+                                _edgeList.Add(SelectedEdge);
+                            }
                             SelectedEdge = null;
-                        }
-                        if (IsDesignMode)
-                        {
-                            _edgeList.Add(SelectedEdge);
                         }
 
                         IsAccept = true;
