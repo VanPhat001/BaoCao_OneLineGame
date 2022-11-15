@@ -24,7 +24,7 @@ namespace BaoCao
 
         public static readonly Brush NodeBackgroundColorDefault = Brushes.OrangeRed;
         public static readonly Brush EdgeColorDefault = Brushes.Black;
-        public static readonly double EdgeThickness = 3;
+        public static readonly double EdgeThickness = 5;
 
 
 

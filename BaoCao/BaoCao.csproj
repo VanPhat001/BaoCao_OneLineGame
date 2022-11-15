@@ -70,6 +70,7 @@
     </Compile>
     <Compile Include="Structures\Edge.cs" />
     <Compile Include="Structures\Graph.cs" />
+    <Compile Include="Utils\Animation.cs" />
     <Compile Include="Utils\Tool.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

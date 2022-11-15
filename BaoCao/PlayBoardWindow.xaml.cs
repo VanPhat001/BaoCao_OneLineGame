@@ -221,10 +221,14 @@ namespace BaoCao
         }
 
 
-        private void Solve_ButtonClickEvent(object sender, RoutedEventArgs e)
+        private async void Solve_ButtonClickEvent(object sender, RoutedEventArgs e)
         {
             GAExcuter gaExcuter = new GAExcuter();
-            gaExcuter.Excute(_nodeList, _edgeList);
+            var path = gaExcuter.Excute(_nodeList, _edgeList);
+            BaoCao.Utils.Animation animation = new Utils.Animation(_nodeList, _edgeList, path);
+            await animation.ShowAnimation();
+            MessageBox.Show("Complete");
+            animation.ClearAnimation();
         }
 
 

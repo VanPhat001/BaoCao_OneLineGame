@@ -31,6 +31,7 @@ namespace BaoCao.Objects
         public object Tag { get; set; }
         public Node UNode { get => _uNode; private set => _uNode = value; }
         public Node VNode { get => _vNode; private set => _vNode = value; }
+        public Canvas Parent => _parent;
         public Point StartPoint => new Point(_line.X1, _line.Y1);
         public Point EndPoint => new Point(_line.X2, _line.Y2);
         public Brush EdgeColor { get => _line.Stroke; set => _line.Stroke = value; }

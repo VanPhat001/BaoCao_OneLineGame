@@ -65,7 +65,7 @@ namespace BaoCao.GeneticAlgorithm
             Debug.WriteLine("\nTotal time: " + watch.ElapsedMilliseconds + "ms");
         }
 
-        public void Excute(List<Node> nodeList, List<Objects.Edge> edgeList)
+        public List<int> Excute(List<Node> nodeList, List<Objects.Edge> edgeList)
         {
             System.Console.WriteLine("Start");
             #region read data - build graph
@@ -120,6 +120,7 @@ namespace BaoCao.GeneticAlgorithm
             path?.ForEach(nodeIndex => Debug.Write($"({nodeIndex}:{nodeList[nodeIndex].NodeText})  "));
             Debug.WriteLine("\nTotal time: " + watch.ElapsedMilliseconds + "ms");
 
+            return path;
         }
 
         private void ReadData(string fileName, out Graph graph)
