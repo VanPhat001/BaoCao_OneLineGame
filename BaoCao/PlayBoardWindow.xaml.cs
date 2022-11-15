@@ -1,21 +1,12 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using BaoCao.GeneticAlgorithm;
+using BaoCao.Objects;
+using Microsoft.Win32;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml.Linq;
 
 
 /**
@@ -136,7 +127,7 @@ namespace BaoCao
                 };
                 btnRead.Click += (sender, e) =>
                 {
-                    ReadGraphFeature();                    
+                    ReadGraphFeature();
                 };
                 _toolBar.Items.Clear();
                 _toolBar.Items.Add(btnExport);
@@ -227,6 +218,13 @@ namespace BaoCao
                 edge.EdgeColor = Constants.EdgeColorPlay;
                 SelectedEdge = edge;
             }
+        }
+
+
+        private void Solve_ButtonClickEvent(object sender, RoutedEventArgs e)
+        {
+            GAExcuter gaExcuter = new GAExcuter();
+            gaExcuter.Excute(_nodeList, _edgeList);
         }
 
 
@@ -371,7 +369,7 @@ namespace BaoCao
 
             if (canCreateEdge)
             {
-                _path.Add(vNodeIndex);                
+                _path.Add(vNodeIndex);
                 edge = new Edge(_canvasGameBoard, u, v);
                 Debug.WriteLine($"tao edge: ({u.GetCenterLocation()},{u.NodeText})   ({v.GetCenterLocation()},{v.NodeText})");
                 if (_path.Count == _edgeList.Count + 1)

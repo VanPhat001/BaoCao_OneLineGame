@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 
-namespace BaoCao
+namespace BaoCao.Objects
 {
     public class Edge
     {

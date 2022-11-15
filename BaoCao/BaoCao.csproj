@@ -56,6 +56,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Constants.cs" />
+    <Compile Include="GeneticAlgorithm\CaThe.cs" />
+    <Compile Include="GeneticAlgorithm\GAExecuter.cs" />
+    <Compile Include="GeneticAlgorithm\GeneticAlgorithm.cs" />
+    <Compile Include="GeneticAlgorithm\QuanThe.cs" />
     <Compile Include="Objects\Edge.cs" />
     <Compile Include="Objects\Node.cs" />
     <Compile Include="PlayBoardWindow.xaml.cs">
@@ -64,6 +68,8 @@
     <Compile Include="SettingWindow.xaml.cs">
       <DependentUpon>SettingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Structures\Edge.cs" />
+    <Compile Include="Structures\Graph.cs" />
     <Compile Include="Utils\Tool.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

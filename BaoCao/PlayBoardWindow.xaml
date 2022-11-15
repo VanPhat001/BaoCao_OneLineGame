@@ -15,7 +15,7 @@
                 <Button Height="40" FontSize="21" Margin="10,0,0,0" >Prev</Button>
                 <Button Height="40" FontSize="21" Margin="10,0,0,0" >Next</Button>
                 <Button Height="40" FontSize="21" Margin="10,0,0,0" >Reset</Button>
-                <Button Height="40" FontSize="21" Margin="10,0,0,0" >Solve</Button>
+                <Button Height="40" FontSize="21" Margin="10,0,0,0" Click="Solve_ButtonClickEvent" >Solve</Button>
                 <Button Height="40" FontSize="21" Margin="10,0,0,0" >Help</Button>
             </ToolBar>
         </ToolBarTray>

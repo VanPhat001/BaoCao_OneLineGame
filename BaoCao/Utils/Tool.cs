@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaoCao.Objects;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,6 +12,13 @@ namespace BaoCao
 {
     public static class Tool
     {
+        private static Random rand = new Random();
+
+        public static int Random(int size)
+        {
+            return rand.Next(size);
+        }
+
         public static void ExportGraphToFile(string path, List<Node> nodes, List<Edge> edges)
         {
             #region danh index cho tung node trong nodes, va cho tung edge trong edges
@@ -47,7 +55,7 @@ namespace BaoCao
             File.WriteAllText(path, datalines.ToString());
         }
 
-        public static bool ReadGraphFromFile(string path, out List<Node> nodes, out List<Edge> edges, 
+        public static bool ReadGraphFromFile(string path, out List<Node> nodes, out List<Edge> edges,
             Func<double, double, Node> createNodeFunc,
             Func<Node, Node, Edge> createEdgeFunc)
         {
@@ -59,7 +67,7 @@ namespace BaoCao
             string[] args = dataLines[0].Split('|');
 
             int nodeSize, edgeSize;
-            if (!Int32.TryParse(args[0], out nodeSize) 
+            if (!Int32.TryParse(args[0], out nodeSize)
                 || !Int32.TryParse(args[1], out edgeSize)) return false;
 
             double x, y;
@@ -68,7 +76,7 @@ namespace BaoCao
                 // x|y|text
                 args = dataLines[i].Split('|');
 
-                if (!double.TryParse(args[0], out x) 
+                if (!double.TryParse(args[0], out x)
                     || !double.TryParse(args[1], out y)) return false;
 
                 Node node = createNodeFunc(x, y);
@@ -82,7 +90,7 @@ namespace BaoCao
             {
                 // uNodeIndex|vNodeIndex
                 args = dataLines[i].Split('|');
-                if (!Int32.TryParse(args[0], out uIndex) 
+                if (!Int32.TryParse(args[0], out uIndex)
                     || !Int32.TryParse(args[1], out vIndex)) return false;
                 Edge edge = createEdgeFunc(nodes[uIndex], nodes[vIndex]);
                 edge.Tag = i - nodeSize - 1;

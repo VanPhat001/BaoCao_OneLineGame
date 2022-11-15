@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.ComponentModel;
 using System.Windows.Input;
 
-namespace BaoCao
+namespace BaoCao.Objects
 {
     public class Node : INotifyPropertyChanged
     {
