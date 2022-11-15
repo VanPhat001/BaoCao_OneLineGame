@@ -24,7 +24,7 @@ namespace BaoCao.Utils
             _newEdge = new List<Edge>();
         }
 
-        public async Task ShowAnimation()
+        public async Task ShowAnimation(int gap=50, int delay=5)
         {
             Canvas parent = _edgeList[0].Parent;
             for (int nodeIndex = 1; nodeIndex < _path.Count; nodeIndex++)
@@ -35,7 +35,7 @@ namespace BaoCao.Utils
                 //edge.EdgeColor = Constants.EdgeColorPlay;
                 //await Task.Delay(400);
 
-                var edge = await DrawLine(uNode, vNode, parent);
+                var edge = await DrawLine(uNode, vNode, parent, gap, delay);
                 _newEdge.Add(edge);
             }
         }
@@ -46,13 +46,12 @@ namespace BaoCao.Utils
             _newEdge.Clear();
         }
 
-        private async Task<Edge> DrawLine(Node uNode, Node vNode, Canvas parent)
+        private async Task<Edge> DrawLine(Node uNode, Node vNode, Canvas parent, int gap, int delay)
         {
             Edge edge = new Edge(parent, uNode);
             edge.EdgeColor = Constants.EdgeColorPlay;
             var curPoint = uNode.GetCenterLocation(); // curPoint === startPoint
             var endPoint = vNode.GetCenterLocation();
-            int gap = 50;
             var delta = new Point(
                 x: (endPoint.X - curPoint.X) / gap,
                 y: (endPoint.Y - curPoint.Y) / gap);
@@ -62,7 +61,7 @@ namespace BaoCao.Utils
                 curPoint.X += delta.X;
                 curPoint.Y += delta.Y;
                 edge.SetEndPoint(curPoint);
-                await Task.Delay(5);
+                await Task.Delay(delay);
             }
 
             return edge;

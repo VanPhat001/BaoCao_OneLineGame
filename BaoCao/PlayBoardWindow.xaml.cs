@@ -128,6 +128,7 @@ namespace BaoCao
                 btnRead.Click += (sender, e) =>
                 {
                     ReadGraphFeature();
+                    
                 };
                 _toolBar.Items.Clear();
                 _toolBar.Items.Add(btnExport);
@@ -156,7 +157,7 @@ namespace BaoCao
         {
             var pos = e.GetPosition(_canvasGameBoard);
 
-            // add node
+            // doi node
             if (IsDesignMode && SelectedNode != null && IsLeftAltDown
                 && SelectedNode.CheckPointIn(pos)
                 && IsMouseLeftButtonDown)
@@ -221,6 +222,11 @@ namespace BaoCao
         }
 
 
+        /// <summary>
+        /// Solve and show animation 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Solve_ButtonClickEvent(object sender, RoutedEventArgs e)
         {
             GAExcuter gaExcuter = new GAExcuter();
@@ -413,9 +419,10 @@ namespace BaoCao
 
                 List<Node> tempNodes;
                 List<Edge> tempEdges;
+                bool OddDesignModeValue = IsDesignMode;
                 IsDesignMode = true; // !IMPORTANT: không được xóa dòng này
                 Tool.ReadGraphFromFile(filePath, out tempNodes, out tempEdges, CreateNode, CreateEdge);
-                IsDesignMode = false; // !IMPORTANT: không được xóa dòng này
+                IsDesignMode = OddDesignModeValue; // !IMPORTANT: không được xóa dòng này
                 _edgeList = tempEdges;
                 _nodeList = tempNodes;
             }
