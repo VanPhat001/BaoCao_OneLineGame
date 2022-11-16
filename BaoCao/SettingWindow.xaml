@@ -5,26 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BaoCao"
         mc:Ignorable="d"
+        Width="400" Height="210" 
         Background="BurlyWood"
-        WindowStartupLocation="CenterScreen"
-        Title="SettingWindow" Height="300" Width="250">
-    <Grid>
-        <CheckBox Content="Music" Margin="26,44,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" IsChecked="True" FontFamily="Mistral">
+        WindowStartupLocation="CenterScreen"        
+        Title="SettingWindow">
+    <DockPanel LastChildFill="False">
+        <CheckBox DockPanel.Dock="Top" Name="_chbxMusic" Content="Music" Margin="18,34,0,0" IsChecked="True" FontFamily="Mistral" Checked="Music_CheckboxCheckedEvent" Unchecked="Music_CheckboxUnCheckedEvent">
             <CheckBox.LayoutTransform>
                 <ScaleTransform ScaleX="2" ScaleY="2"/>
             </CheckBox.LayoutTransform>
         </CheckBox>
-        <ComboBox x:Name="cbxLevels" HorizontalAlignment="Center" Margin="0,88,0,0" VerticalAlignment="Top" Width="96" BorderBrush="#FFAF3535">
-            <ComboBox.Background>
-                <LinearGradientBrush EndPoint="0,1">
-                    <GradientStop Color="#FFF0F0F0"/>
-                    <GradientStop Color="#FFC59C43" Offset="1"/>
-                </LinearGradientBrush>
-            </ComboBox.Background>
-        </ComboBox>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="-320,296,0,0" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="24,85,0,0" TextWrapping="Wrap" Text="Levels" VerticalAlignment="Top" Height="33" Width="71" FontSize="24" FontFamily="Mistral"/>
-        <Button Content="back" HorizontalAlignment="Left" Height="36" Margin="176,237,0,0" VerticalAlignment="Top" Width="66" FontSize="24" Background="#FFC59C43" BorderBrush="#FF060606" Foreground="#FF673030" FontFamily="Mistral"/>
 
-    </Grid>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="18,12,0,0">
+            <TextBlock FontFamily="Mistral" FontSize="24">Volumn</TextBlock>
+            <Slider DockPanel.Dock="Top" Name="_slider" VerticalAlignment="Center" Margin="30,0,0,0" Minimum="0" Maximum="1" Width="270" />
+        </StackPanel>
+
+        <Button DockPanel.Dock="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10" Content="back" Height="36" Width="78" FontSize="24" Background="#FFC59C43" BorderBrush="#FF060606" Foreground="#FF673030" FontFamily="Mistral" Click="Back_ButtonClickEvent"/>
+
+    </DockPanel>
 </Window>

@@ -371,10 +371,19 @@ namespace BaoCao
         /// <param name="e"></param>
         private async void Solve_ButtonClickEvent(object sender, RoutedEventArgs e)
         {
+            _edgeGameDrawList.ForEach(item => item.RemoveParent());
+            _edgeGameDrawList.Clear();
+            _path.Clear();
+            _history.Clear();
+            await System.Threading.Tasks.Task.Delay(0);
+
+            // !FIXME: giao diện bị block bởi ảnh hưởng của dòng while true bên trong hàm ExecuteAsync(). Đặt await thì giảm tốc độ, không đặt thì bị block 🙄🙃
             GAExcuter gaExcuter = new GAExcuter();
-            var path = gaExcuter.Excute(_nodeList, _edgeList);
+            var path = await gaExcuter.ExcuteAsync(_nodeList, _edgeList);
+
             BaoCao.Utils.Animation animation = new Utils.Animation(_nodeList, _edgeList, path);
-            await animation.ShowAnimationTask();
+            await animation.ShowAnimationAsync();
+
             MessageBox.Show("Complete");
             animation.ClearAnimation();
         }

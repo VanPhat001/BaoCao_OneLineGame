@@ -21,8 +21,7 @@ namespace BaoCao
     /// </summary>
     public partial class MainWindow : Window
     {
-        private SettingWindow _stWindow = null;
-        private MediaElement _media = null;
+        private MediaElement _media;
 
 
         /// <summary>
@@ -30,20 +29,21 @@ namespace BaoCao
         /// </summary>
         public MainWindow()
         {
+            InitializeComponent();
+
             _media = new MediaElement();
             _media.Source = new Uri("nhacnen2.mp3", UriKind.Relative);
             _media.LoadedBehavior = MediaState.Manual;
             _media.UnloadedBehavior = MediaState.Stop;
+
             _media.MediaEnded += (sender, e) =>
             {
                 _media.Position = TimeSpan.Zero;
                 _media.Play();
             };
 
-            InitializeComponent();
-
             _stackPanel.Children.Add(_media);
-            //_media.Play();                        
+            _media.Play();
 
             this.Closing += Exit_MainWindowClosingEvent;
         }
@@ -82,10 +82,8 @@ namespace BaoCao
         /// <param name="e"></param>
         private void Setting_ButtonClickEvent(object sender, RoutedEventArgs e)
         {
-
-            _stWindow = new SettingWindow();
-            _stWindow.ShowDialog();
-
+            SettingWindow settingWindow = new SettingWindow(_media);
+            settingWindow.ShowDialog();
         }
 
 

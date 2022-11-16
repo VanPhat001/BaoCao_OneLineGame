@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace BaoCao
 {
@@ -19,28 +9,25 @@ namespace BaoCao
     /// </summary>
     public partial class SettingWindow : Window
     {
+        private MediaElement _media;
+
         /// <summary>
         /// 
         /// </summary>
-        public SettingWindow()
+        public SettingWindow(MediaElement media)
         {
+            _media = media; // !IMPORTANT: không được xóa hay dời dòng này
             InitializeComponent();
 
+            _chbxMusic.IsChecked = Tool.GetMediaState(_media) == MediaState.Play;            
 
-            this.Loaded += SettingWindow_Loaded;
-        }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public class MyData
-        {
-            public string Text { get; set; }
-            public MyData(string s)
-            {
-                Text = s;
-            }
+            // _media.Volume <=> _slider.Value
+            _slider.SetBinding(Slider.ValueProperty,
+                new System.Windows.Data.Binding(nameof(_media.Volume))
+                {
+                    Source = _media,
+                    UpdateSourceTrigger = System.Windows.Data.UpdateSourceTrigger.PropertyChanged
+                });
         }
 
 
@@ -49,22 +36,34 @@ namespace BaoCao
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SettingWindow_Loaded(object sender, RoutedEventArgs e)
+        private void Back_ButtonClickEvent(object sender, RoutedEventArgs e)
         {
-            List<MyData> list = new List<MyData>()
-            {
-                new MyData("chuoi 1"),
-                new MyData("chuoi 2"),
-                new MyData("chuoi 3"),
-                new MyData("chuoi 4"),
-                new MyData("chuoi 5"),
-                new MyData("chuoi 6"),
-                new MyData("chuoi 7"),
-            };
+            System.Windows.Data.BindingOperations.ClearBinding(_slider, Slider.ValueProperty);
+            System.Windows.Data.BindingOperations.ClearBinding(_media, MediaElement.VolumeProperty);
+            this.Close();
+        }
 
-                        
-            cbxLevels.ItemsSource = list;
-            cbxLevels.DisplayMemberPath = "Text";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Music_CheckboxCheckedEvent(object sender, RoutedEventArgs e)
+        {
+            _media.Position = System.TimeSpan.Zero;
+            _media.Play();
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Music_CheckboxUnCheckedEvent(object sender, RoutedEventArgs e)
+        {
+            _media.Stop();            
         }
     }
 }

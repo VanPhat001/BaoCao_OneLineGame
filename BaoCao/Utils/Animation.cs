@@ -31,7 +31,7 @@ namespace BaoCao.Utils
         /// <param name="gap"></param>
         /// <param name="delay"></param>
         /// <returns></returns>
-        public async Task ShowAnimationTask(int gap=50, int delay=5)
+        public async Task ShowAnimationAsync(int gap=50, int delay=5)
         {
             Canvas parent = _edgeList[0].Parent;
             for (int nodeIndex = 1; nodeIndex < _path.Count; nodeIndex++)

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace BaoCao.GeneticAlgorithm
 {
@@ -27,7 +28,7 @@ namespace BaoCao.GeneticAlgorithm
             watch.Start();
 
             CaThe goal = null;
-            GA ga = new GA(
+            GeneticAlgorithm ga = new GeneticAlgorithm(
                         graph,
                         quanTheSize: 30,
                         quanTheMax: 3000,
@@ -76,21 +77,23 @@ namespace BaoCao.GeneticAlgorithm
         /// <param name="nodeList"></param>
         /// <param name="edgeList"></param>
         /// <returns></returns>
-        public List<int> Excute(List<Node> nodeList, List<Objects.Edge> edgeList)
+        public async Task<List<int>> ExcuteAsync(List<Node> nodeList, List<Objects.Edge> edgeList)
         {
+            await Task.Delay(1);
             System.Console.WriteLine("Start");
             #region read data - build graph
             var graph = new Structures.Graph(nodeList.Count);
             edgeList.ForEach(edge => graph.AddEdge((int)edge.UNode.Tag, (int)edge.VNode.Tag));
             #endregion
 
+            //await Task.Delay(1);
             System.Console.WriteLine("Running...");
             #region GA_Algorithm
             Stopwatch watch = new Stopwatch();
             watch.Start();
 
             CaThe goal = null;
-            GA ga = new GA(
+            GeneticAlgorithm ga = new GeneticAlgorithm(
                         graph,
                         quanTheSize: 30,
                         quanTheMax: 3000,
@@ -119,17 +122,19 @@ namespace BaoCao.GeneticAlgorithm
 
                 // O(_children.Count)
                 ga.DotBien();
+
+                //await Task.Delay(1);
             }
 
             watch.Stop();
             #endregion
-
+                        
             Debug.WriteLine("End");
             goal?.Show();
             List<int> path = goal?.UpdatePath(graph);
             Debug.Write("Path: ");
             path?.ForEach(nodeIndex => Debug.Write($"({nodeIndex}:{nodeList[nodeIndex].NodeText})  "));
-            Debug.WriteLine("\nTotal time: " + watch.ElapsedMilliseconds + "ms");
+            Debug.WriteLine($"\nTotal time: {watch.ElapsedMilliseconds}ms");
 
             return path;
         }

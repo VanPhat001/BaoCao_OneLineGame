@@ -1,12 +1,13 @@
 ﻿using BaoCao.Structures;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace BaoCao.GeneticAlgorithm
 {
-    public class GA
+    public class GeneticAlgorithm
     {
         private readonly Graph _graph;
         private QuanThe _quanThe;
@@ -25,7 +26,7 @@ namespace BaoCao.GeneticAlgorithm
         /// <param name="quanTheMax"></param>
         /// <param name="survivalPercent"></param>
         /// <param name="couplePercent"></param>
-        public GA(Graph graph, int quanTheSize, int quanTheMax, double survivalPercent, double couplePercent)
+        public GeneticAlgorithm(Graph graph, int quanTheSize, int quanTheMax, double survivalPercent, double couplePercent)
         {
             _graph = graph;
             _children = new List<CaThe>();
@@ -81,7 +82,7 @@ namespace BaoCao.GeneticAlgorithm
                 int size = _quanThe.SoLuongCaThe(phanTang);
                 if (size > 0)
                 {
-                    System.Console.WriteLine("Min Thich Nghi = " + size);
+                    Debug.WriteLine("Min Thich Nghi = " + size);
                     break;
                 }
             }
@@ -146,7 +147,7 @@ namespace BaoCao.GeneticAlgorithm
                 int size = _quanThe.SoLuongCaThe(phanTang);
                 if (size != 0)
                 {
-                    System.Console.WriteLine($"Min Thich Nghi = {phanTang} --- Size: {size}");
+                    Debug.WriteLine($"Min Thich Nghi = {phanTang} --- Size: {size}");
                     break;
                 }
             }
