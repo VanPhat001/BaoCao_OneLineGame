@@ -24,7 +24,14 @@ namespace BaoCao.Utils
             _newEdge = new List<Edge>();
         }
 
-        public async Task ShowAnimation(int gap=50, int delay=5)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gap"></param>
+        /// <param name="delay"></param>
+        /// <returns></returns>
+        public async Task ShowAnimationTask(int gap=50, int delay=5)
         {
             Canvas parent = _edgeList[0].Parent;
             for (int nodeIndex = 1; nodeIndex < _path.Count; nodeIndex++)
@@ -35,18 +42,32 @@ namespace BaoCao.Utils
                 //edge.EdgeColor = Constants.EdgeColorPlay;
                 //await Task.Delay(400);
 
-                var edge = await DrawLine(uNode, vNode, parent, gap, delay);
+                var edge = await DrawLineTask(uNode, vNode, parent, gap, delay);
                 _newEdge.Add(edge);
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void ClearAnimation()
         {
             _newEdge.ForEach(item => item.RemoveParent());
             _newEdge.Clear();
         }
 
-        private async Task<Edge> DrawLine(Node uNode, Node vNode, Canvas parent, int gap, int delay)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="uNode"></param>
+        /// <param name="vNode"></param>
+        /// <param name="parent"></param>
+        /// <param name="gap"></param>
+        /// <param name="delay"></param>
+        /// <returns></returns>
+        private async Task<Edge> DrawLineTask(Node uNode, Node vNode, Canvas parent, int gap, int delay)
         {
             Edge edge = new Edge(parent, uNode);
             edge.EdgeColor = Constants.EdgeColorPlay;

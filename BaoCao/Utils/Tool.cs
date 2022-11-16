@@ -14,11 +14,24 @@ namespace BaoCao
     {
         private static Random rand = new Random();
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="size"></param>
+        /// <returns></returns>
         public static int Random(int size)
         {
             return rand.Next(size);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="nodes"></param>
+        /// <param name="edges"></param>
         public static void ExportGraphToFile(string path, List<Node> nodes, List<Edge> edges)
         {
             #region danh index cho tung node trong nodes, va cho tung edge trong edges
@@ -55,6 +68,16 @@ namespace BaoCao
             File.WriteAllText(path, datalines.ToString());
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="nodes"></param>
+        /// <param name="edges"></param>
+        /// <param name="createNodeFunc"></param>
+        /// <param name="createEdgeFunc"></param>
+        /// <returns></returns>
         public static bool ReadGraphFromFile(string path, out List<Node> nodes, out List<Edge> edges,
             Func<double, double, Node> createNodeFunc,
             Func<Node, Node, Edge> createEdgeFunc)

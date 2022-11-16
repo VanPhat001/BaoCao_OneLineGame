@@ -12,6 +12,11 @@ namespace BaoCao.GeneticAlgorithm
         public List<int> ErrorIndexList { get => _errorIndexList; private set => _errorIndexList = value; }
         public int DoThichNghi => ErrorIndexList.Count;
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+
         public CaThe()
         {
             Gen = new List<int>();
@@ -19,11 +24,21 @@ namespace BaoCao.GeneticAlgorithm
             _genString = "";
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void Show()
         {
             Console.WriteLine("Gen: " + _genString);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="graph"></param>
+        /// <returns></returns>
         public List<int> UpdatePath(Graph graph)
         {
             Edge e = graph.EdgeList[Gen[0]];
@@ -44,6 +59,10 @@ namespace BaoCao.GeneticAlgorithm
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void UpdateGenString()
         {
             _genString = "";
@@ -53,6 +72,15 @@ namespace BaoCao.GeneticAlgorithm
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="graph"></param>
+        /// <param name="u"></param>
+        /// <param name="v"></param>
+        /// <param name="errList"></param>
+        /// <returns></returns>
         private List<int> BuildPath(Graph graph, int u, int v, out List<int> errList)
         {
             // giaTriThichNghi = 0;
@@ -107,6 +135,11 @@ namespace BaoCao.GeneticAlgorithm
             return newPath;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return _genString;

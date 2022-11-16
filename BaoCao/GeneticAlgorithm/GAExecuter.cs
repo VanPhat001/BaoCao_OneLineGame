@@ -9,6 +9,10 @@ namespace BaoCao.GeneticAlgorithm
 {
     public class GAExcuter
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filePath"></param>
         public void Excute(string filePath)
         {
             System.Console.WriteLine("Start");
@@ -65,6 +69,13 @@ namespace BaoCao.GeneticAlgorithm
             Debug.WriteLine("\nTotal time: " + watch.ElapsedMilliseconds + "ms");
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nodeList"></param>
+        /// <param name="edgeList"></param>
+        /// <returns></returns>
         public List<int> Excute(List<Node> nodeList, List<Objects.Edge> edgeList)
         {
             System.Console.WriteLine("Start");
@@ -123,6 +134,12 @@ namespace BaoCao.GeneticAlgorithm
             return path;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="graph"></param>
         private void ReadData(string fileName, out Graph graph)
         {
             var dataLines = File.ReadAllLines(fileName);
@@ -144,6 +161,14 @@ namespace BaoCao.GeneticAlgorithm
             #endregion
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <exception cref="Exception"></exception>
         private void ConvertToNumbers(string s, out int a, out int b)
         {
             var args = s.Split(' ');

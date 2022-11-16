@@ -19,6 +19,9 @@ namespace BaoCao
     /// </summary>
     public partial class SettingWindow : Window
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public SettingWindow()
         {
             InitializeComponent();
@@ -28,6 +31,9 @@ namespace BaoCao
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
         public class MyData
         {
             public string Text { get; set; }
@@ -37,6 +43,12 @@ namespace BaoCao
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SettingWindow_Loaded(object sender, RoutedEventArgs e)
         {
             List<MyData> list = new List<MyData>()

@@ -37,6 +37,12 @@ namespace BaoCao.Objects
         public Brush EdgeColor { get => _line.Stroke; set => _line.Stroke = value; }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="uNode"></param>
+        /// <param name="vNode"></param>
         public Edge(Canvas parent, Node uNode = null, Node vNode = null)
         {
             //< Line X1 = "20" X2 = "150" Y1 = "13" Y2 = "200"
@@ -73,18 +79,33 @@ namespace BaoCao.Objects
 
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="startPoint"></param>
         private void SetStartPoint(Point startPoint)
         {
             _line.X1 = startPoint.X;
             _line.Y1 = startPoint.Y;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="endPoint"></param>
         public void SetEndPoint(Point endPoint)
         {
             _line.X2 = endPoint.X;
             _line.Y2 = endPoint.Y;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
         public void SetUNode(Node value)
         {
             if (value == VNode && VNode != null) return;
@@ -101,6 +122,11 @@ namespace BaoCao.Objects
             };
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
         public void SetVNode(Node value)
         {
             if (value == UNode && UNode != null) return;
@@ -117,12 +143,21 @@ namespace BaoCao.Objects
             };
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="canvas"></param>
         public void AddParent(Canvas canvas)
         {
             _parent = canvas;
             _parent.Children.Add(_line);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void RemoveParent()
         {
             if (_parent != null)
@@ -133,6 +168,10 @@ namespace BaoCao.Objects
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void RemoveMenu()
         {
             _line.ContextMenu = null;

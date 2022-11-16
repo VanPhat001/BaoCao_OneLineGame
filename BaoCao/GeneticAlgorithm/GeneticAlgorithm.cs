@@ -17,7 +17,14 @@ namespace BaoCao.GeneticAlgorithm
 
         public int QuanTheSize => _quanThe.Count;
 
-        // O(quanTheSize * genSize) === O(quanTheSize * graph.M)
+        /// <summary>
+        /// O(quanTheSize * genSize) === O(quanTheSize * graph.M)
+        /// </summary>
+        /// <param name="graph"></param>
+        /// <param name="quanTheSize"></param>
+        /// <param name="quanTheMax"></param>
+        /// <param name="survivalPercent"></param>
+        /// <param name="couplePercent"></param>
         public GA(Graph graph, int quanTheSize, int quanTheMax, double survivalPercent, double couplePercent)
         {
             _graph = graph;
@@ -53,7 +60,11 @@ namespace BaoCao.GeneticAlgorithm
             }
         }
 
-        // O(Max(_children.Count, N, graph.M))
+
+        /// <summary>
+        /// O(Max(_children.Count, N, graph.M))
+        /// </summary>
+        /// <param name="goal"></param>
         public void TinhThichNghi(out CaThe goal)
         {
             goal = null;
@@ -83,7 +94,11 @@ namespace BaoCao.GeneticAlgorithm
             _children.Clear();
         }
 
-        // (*) O(Max(N, _chilren.Count * graph.M)) ~ O(N * graph.M)
+
+        /// <summary>
+        /// (*) O(Max(N, _chilren.Count * graph.M)) ~ O(N * graph.M)        
+        /// </summary>
+        /// <param name="goal"></param>
         public void TinhThichNghi2(out CaThe goal)
         {
             goal = null;
@@ -98,8 +113,8 @@ namespace BaoCao.GeneticAlgorithm
                     CaThe child = _children[i];
                     child.UpdatePath(_graph);
                     child.UpdateGenString();
-                // int phanTang = child.DoThichNghi;
-                // _quanThe.Add(phanTang, child);
+                    // int phanTang = child.DoThichNghi;
+                    // _quanThe.Add(phanTang, child);
                 }
             };
 
@@ -144,7 +159,10 @@ namespace BaoCao.GeneticAlgorithm
             _children.Clear();
         }
 
-        // O(Max( deadNumber * N, graph.M * N ))
+
+        /// <summary>
+        /// O(Max( deadNumber * N, graph.M * N ))
+        /// </summary>
         public void ChonLocTuNhien()
         {
             int soTang = _quanThe.SoTang;
@@ -195,7 +213,10 @@ namespace BaoCao.GeneticAlgorithm
 #endif
         }
 
-        // O(Max( graph.M, N * N ))
+
+        /// <summary>
+        /// O(Max( graph.M, N * N ))
+        /// </summary>
         public void LaiTao()
         {
             int soTang = _quanThe.SoTang;
@@ -242,7 +263,10 @@ namespace BaoCao.GeneticAlgorithm
             }
         }
 
-        // O(Max(coupleNumber * Max(N, graph.M), _children.Count))
+
+        /// <summary>
+        /// O(Max(coupleNumber * Max(N, graph.M), _children.Count))
+        /// </summary>
         public void LaiTao2()
         {
             int soTang = _quanThe.SoTang;
@@ -316,7 +340,13 @@ namespace BaoCao.GeneticAlgorithm
             }
         }
 
-        // O(graph.M)
+        
+        /// <summary>
+        /// O(graph.M)
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         private CaThe GiaoPhoi(CaThe a, CaThe b)
         {
             int genSize = a.Gen.Count;
@@ -357,7 +387,10 @@ namespace BaoCao.GeneticAlgorithm
             return child;
         }
 
-        // O(_children.Count)
+
+        /// <summary>
+        /// O(_children.Count)        
+        /// </summary>
         public void DotBien()
         {
             int genSize = _graph.M;

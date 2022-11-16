@@ -10,9 +10,20 @@ namespace BaoCao.GeneticAlgorithm
         public int SoTang => _caTheList.Count;
         public int Count { get; private set; }
 
-        // O(N)
+
+        /// <summary>
+        /// O(N)
+        /// </summary>
+        /// <param name="phanTang"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public CaThe this[int phanTang, int index] => _caTheList[phanTang].ElementAt(index);
 
+
+        /// <summary>
+        /// O(_graph.M)
+        /// </summary>
+        /// <param name="soTang"></param>
         public QuanThe(int soTang)
         {
             Count = 0;
@@ -23,7 +34,13 @@ namespace BaoCao.GeneticAlgorithm
             }
         }
 
-        // O(1)
+
+        /// <summary>
+        /// O(1)
+        /// </summary>
+        /// <param name="phanTang"></param>
+        /// <param name="a"></param>
+        /// <returns></returns>
         public bool Add(int phanTang, CaThe a)
         {
             if (_caTheList[phanTang].Add(a))
@@ -34,7 +51,13 @@ namespace BaoCao.GeneticAlgorithm
             return false;
         }
 
-        // O(N)
+
+        /// <summary>
+        /// O(N)
+        /// </summary>
+        /// <param name="phanTang"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public bool Remove(int phanTang, int index)
         {
             if (_caTheList[phanTang].Remove(_caTheList[phanTang].ElementAt(index)))
@@ -45,14 +68,23 @@ namespace BaoCao.GeneticAlgorithm
             return false;
         }
 
-        // O(N)
+
+        /// <summary>
+        /// O(N)
+        /// </summary>
+        /// <param name="phanTang"></param>
         public void RemovePhanTang(int phanTang)
         {
             Count -= this.SoLuongCaThe(phanTang);
             _caTheList[phanTang].Clear();
         }
 
-        // O(N)
+
+        /// <summary>
+        /// O(N)
+        /// </summary>
+        /// <param name="phanTang"></param>
+        /// <param name="startIndex"></param>
         public void RemoveRange(int phanTang, int startIndex)
         {
             // O(N)
@@ -67,7 +99,12 @@ namespace BaoCao.GeneticAlgorithm
             _caTheList[phanTang] = list.ToHashSet(new CaTheComparer());
         }
 
-        // O(1)
+
+        /// <summary>
+        /// O(1)
+        /// </summary>
+        /// <param name="phanTang"></param>
+        /// <returns></returns>
         public int SoLuongCaThe(int phanTang)
         {
             return _caTheList[phanTang].Count;

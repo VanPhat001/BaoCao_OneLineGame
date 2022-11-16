@@ -33,6 +33,7 @@ namespace BaoCao
     /// </summary>
     public partial class PlayBoardWindow : Window
     {
+        #region fields
         private bool _isDesignMode;
         private Node _selectedNode;
         private Edge _selectedEdge;
@@ -41,6 +42,7 @@ namespace BaoCao
         private List<Edge> _edgeGameDrawList; // danh sách Edge chứa các cung được vẽ trong chế độ chơi game
         private List<int> _path; // luu tru duong di theo node index
         private Stack<int> _history; // lưu trữ lịch sử đường đi khi dùng tính năng Next hoặc Prev
+        #endregion
 
 
         #region properties
@@ -71,7 +73,10 @@ namespace BaoCao
         #endregion
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="isDesignMode"></param>
         public PlayBoardWindow(bool isDesignMode)
         {
             InitializeComponent();
@@ -296,8 +301,6 @@ namespace BaoCao
         }
 
 
-
-
         /// <summary>
         /// 
         /// </summary>
@@ -305,7 +308,7 @@ namespace BaoCao
         /// <param name="e"></param>
         private void Next_ButtonClickEvent(object sender, RoutedEventArgs e)
         {
-            // TODO: nhớ xóa lịch sử trước khi mọi điều tồi tệ hơn :)
+            // TODO: nhớ xóa lịch sử trước khi mọi điều tồi tệ hơn 🙂
             // phải có lịch sử mới xóa (triển khai) được =)
             if (_history.Count > 0)
             {
@@ -360,7 +363,7 @@ namespace BaoCao
             GAExcuter gaExcuter = new GAExcuter();
             var path = gaExcuter.Excute(_nodeList, _edgeList);
             BaoCao.Utils.Animation animation = new Utils.Animation(_nodeList, _edgeList, path);
-            await animation.ShowAnimation();
+            await animation.ShowAnimationTask();
             MessageBox.Show("Complete");
             animation.ClearAnimation();
         }

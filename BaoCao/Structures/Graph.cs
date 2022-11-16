@@ -12,6 +12,11 @@ namespace BaoCao.Structures
         public List<Edge> EdgeList { get => _edgeList; private set => _edgeList = value; }
         public List<List<bool>> Matrix { get => _matrix; private set => _matrix = value; }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="n"></param>
         public Graph(int n)
         {
             N = n;
@@ -28,6 +33,13 @@ namespace BaoCao.Structures
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="u"></param>
+        /// <param name="v"></param>
+        /// <returns></returns>
         public bool AddEdge(int u, int v)
         {
             if (!Adjacent(u, v))
@@ -42,6 +54,13 @@ namespace BaoCao.Structures
             return false;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="u"></param>
+        /// <param name="v"></param>
+        /// <returns></returns>
         public bool Adjacent(int u, int v)
         {
             return _matrix[u][v];

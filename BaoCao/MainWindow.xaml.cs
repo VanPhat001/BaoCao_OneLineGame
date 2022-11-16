@@ -21,8 +21,13 @@ namespace BaoCao
     /// </summary>
     public partial class MainWindow : Window
     {
-        SettingWindow _stWindow = null;
-        MediaElement _media = null;
+        private SettingWindow _stWindow = null;
+        private MediaElement _media = null;
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         public MainWindow()
         {
             _media = new MediaElement();
@@ -44,6 +49,7 @@ namespace BaoCao
             this.Closing += Exit_MainWindowClosing;        
         }
                
+
         /// <summary>
         /// 
         /// </summary>
@@ -58,6 +64,7 @@ namespace BaoCao
             //}
         }
 
+
         /// <summary>
         /// exit window
         /// </summary>
@@ -67,6 +74,7 @@ namespace BaoCao
         {
             this.Close();
         }
+
 
         /// <summary>
         /// open setting window
@@ -80,6 +88,7 @@ namespace BaoCao
             _stWindow.ShowDialog();
             
         }
+
 
         /// <summary>
         /// open new game window --- open PlayBoardWindow
@@ -95,6 +104,7 @@ namespace BaoCao
 
             this.Show();
         }
+
 
         /// <summary>
         /// design game board

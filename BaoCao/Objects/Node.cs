@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 using System.Windows.Controls;
-using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 using System.Windows;
 using System.Windows.Media;
@@ -46,6 +40,10 @@ namespace BaoCao.Objects
         private void OnNodeRemove() => _nodeRemove?.Invoke(this, new EventArgs());
         #endregion
 
+
+        /// <summary>
+        /// 
+        /// </summary>
         public Node()
         {
             _parent = null;
@@ -106,12 +104,21 @@ namespace BaoCao.Objects
             _elp.MouseDown += (sender, e) => OnClick(e);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parent"></param>
         public void SetParent(Canvas parent)
         {
             _parent = parent;
             _parent.Children.Add(_grid);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void RemoveParent()
         {
             _parent.Children.Remove(_grid);
@@ -119,6 +126,11 @@ namespace BaoCao.Objects
             OnNodeRemove(); // invoke NodeRemove event
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
         public void SetLocation(Point point)
         {
             Canvas.SetLeft(_grid, point.X);
@@ -126,6 +138,11 @@ namespace BaoCao.Objects
             OnPropertyChanged("Location");
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="centerPoint"></param>
         public void SetCenterLocation(Point centerPoint)
         {
             centerPoint.X -= NodeWidth / 2;
@@ -133,16 +150,32 @@ namespace BaoCao.Objects
             SetLocation(centerPoint);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Point GetLocation()
         {
             return new Point(Canvas.GetLeft(_grid), Canvas.GetTop(_grid));
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Point GetCenterLocation()
         {
             return new Point(Canvas.GetLeft(_grid) + NodeWidth / 2, Canvas.GetTop(_grid) + NodeHeight / 2);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
         public bool CheckPointIn(Point point)
         {
             var topLeft = GetLocation();
@@ -152,26 +185,46 @@ namespace BaoCao.Objects
                 && 0 <= point.Y && point.Y <= NodeHeight;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void Default()
         {
             _elp.Fill = Constants.NodeBackgroundColorDefault;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void Select()
         {
             _elp.Fill = Constants.NodeBackgroundColorSelect;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void SetFocus()
         {
             _textBoxHidden.Focus();
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void ClearFocus()
         {
             Keyboard.ClearFocus();
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void RemoveMenu()
         {
             _elp.ContextMenu = null;
