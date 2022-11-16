@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+using System.IO;
 using System.Windows.Media;
 
 namespace BaoCao
 {
     static public class Constants
     {
+        public static readonly string RootPath = AppDomain.CurrentDomain.BaseDirectory;
+        public static readonly string LevelPath = Path.Combine(RootPath, "Resources", "Levels");
+        public static readonly string MusicPath = Path.Combine(RootPath, "Resources", "Musics");
+
+
         public static readonly double NodeSize = 50;
         public static readonly double NodeFontSize = 16;
         public static readonly Brush BoardBackgroundColor = ColorRGB(188, 184, 177);

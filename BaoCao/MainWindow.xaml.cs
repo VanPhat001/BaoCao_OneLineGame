@@ -43,19 +43,18 @@ namespace BaoCao
             InitializeComponent();
 
             _stackPanel.Children.Add(_media);
-            //_media.Play();
+            //_media.Play();                        
 
-
-            this.Closing += Exit_MainWindowClosing;        
+            this.Closing += Exit_MainWindowClosingEvent;
         }
-               
+
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Exit_MainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Exit_MainWindowClosingEvent(object sender, System.ComponentModel.CancelEventArgs e)
         {
             //MessageBoxResult r =  MessageBox.Show("Ban co muon thoat khoi chuong trinh?", "...", MessageBoxButton.YesNo);
             //if (r == MessageBoxResult.No)
@@ -70,7 +69,7 @@ namespace BaoCao
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Exit_ButtonClick(object sender, RoutedEventArgs e)
+        private void Exit_ButtonClickEvent(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -81,12 +80,12 @@ namespace BaoCao
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Setting_ButtonClick(object sender, RoutedEventArgs e)
+        private void Setting_ButtonClickEvent(object sender, RoutedEventArgs e)
         {
-            
+
             _stWindow = new SettingWindow();
             _stWindow.ShowDialog();
-            
+
         }
 
 
@@ -95,12 +94,21 @@ namespace BaoCao
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void _ButtonClick(object sender, RoutedEventArgs e)
+        private void Open_ButtonClickEvent(object sender, RoutedEventArgs e)
         {
             this.Hide();
 
-            PlayBoardWindow playBoardWindow = new PlayBoardWindow(isDesignMode: false);
-            playBoardWindow.ShowDialog();
+            LevelWindow levelWindow = new LevelWindow();
+            levelWindow.ShowDialog();
+            //MessageBox.Show(levelWindow.LevelFilePath);
+
+            if (System.IO.File.Exists(levelWindow.LevelFilePath))
+            {
+                PlayBoardWindow playBoardWindow = new PlayBoardWindow(
+                        isDesignMode: false,
+                        levelFilePath: levelWindow.LevelFilePath);
+                playBoardWindow.ShowDialog();
+            }
 
             this.Show();
         }
@@ -111,7 +119,7 @@ namespace BaoCao
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Design_ButtonClick(object sender, RoutedEventArgs e)
+        private void Design_ButtonClickEvent(object sender, RoutedEventArgs e)
         {
             this.Hide();
 

@@ -60,6 +60,9 @@
     <Compile Include="GeneticAlgorithm\GAExecuter.cs" />
     <Compile Include="GeneticAlgorithm\GeneticAlgorithm.cs" />
     <Compile Include="GeneticAlgorithm\QuanThe.cs" />
+    <Compile Include="LevelWindow.xaml.cs">
+      <DependentUpon>LevelWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Objects\Edge.cs" />
     <Compile Include="Objects\Node.cs" />
     <Compile Include="PlayBoardWindow.xaml.cs">
@@ -72,6 +75,10 @@
     <Compile Include="Structures\Graph.cs" />
     <Compile Include="Utils\Animation.cs" />
     <Compile Include="Utils\Tool.cs" />
+    <Page Include="LevelWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -120,7 +127,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Windows\" />
+    <Folder Include="bin\Debug\Resources\Levels\" />
+    <Folder Include="bin\Debug\Resources\Musics\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

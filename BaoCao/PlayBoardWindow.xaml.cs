@@ -9,11 +9,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 
 
-/**
+/** TODO:
  * [x] chọn nút ===> click nút
  * [x] vẽ nút ===> ctrl + click chuột trên canvas
  * [x] di chuyển nút ===> alt + click chuột trên nút + di chuột
- * [x]xóa nút ==> chọn nút + del
+ * [x] xóa nút ==> chọn nút + del
  * [x] xóa cung
  * [x] vẽ cung ===> (shift + click trên nút) (di chuột + đè shift + nút chưa được thả)
  * [x] hủy cung ===> vẽ cung --> thả chuột không trên nút nào
@@ -77,7 +77,7 @@ namespace BaoCao
         /// 
         /// </summary>
         /// <param name="isDesignMode"></param>
-        public PlayBoardWindow(bool isDesignMode)
+        public PlayBoardWindow(bool isDesignMode, string levelFilePath="")
         {
             InitializeComponent();
 
@@ -136,8 +136,11 @@ namespace BaoCao
                 };
                 btnRead.Click += (sender, e) =>
                 {
-                    ReadGraphFeature();
-
+                    OpenFileDialog openFileDialog = new OpenFileDialog();
+                    if (openFileDialog.ShowDialog() == true)
+                    {
+                        ReadGraphFeature(openFileDialog.FileName);
+                    }
                 };
                 _toolBar.Items.Clear();
                 _toolBar.Items.Add(btnExport);
@@ -145,7 +148,15 @@ namespace BaoCao
             }
             else // isDesignMode == false ---> che do choi game
             {
-                ReadGraphFeature();
+                // đường dẫn luôn đúng, không cần kiểm tra
+                //bool exists = System.IO.File.Exists(fileLevelPath);
+                //if (!exists)
+                //{
+                //    MessageBox.Show("Đường dẫn không hợp lệ!");
+                //    return;
+                //}
+
+                ReadGraphFeature(levelFilePath);
                 // Ngăn chặn việc xóa node, edge trong lúc chơi
                 _nodeList.ForEach(node => node.RemoveMenu());
                 _edgeList.ForEach(edge => edge.RemoveMenu());
@@ -161,7 +172,7 @@ namespace BaoCao
         /// <param name="e"></param>
         private void CanvasGameBoard_MouseDownEvent(object sender, MouseButtonEventArgs e)
         {
-            if (IsLeftCtrlDown && IsMouseLeftButtonDown)
+            if (IsDesignMode && IsLeftCtrlDown && IsMouseLeftButtonDown)
             {
                 var pos = e.GetPosition(_canvasGameBoard);
                 var node = CreateNode(pos.X, pos.Y);
@@ -515,7 +526,7 @@ namespace BaoCao
                 Debug.WriteLine($"tao edge: ({u.GetCenterLocation()},{u.NodeText})   ({v.GetCenterLocation()},{v.NodeText})");
                 if (_path.Count == _edgeList.Count + 1)
                 {
-                    MessageBox.Show("Bạn thắng rồi đó! Cừ cái xem nào =))");
+                    MessageBox.Show("Bạn thắng rồi đó! Cừ cái xem nào 😎");
                 }
                 return edge;
             }
@@ -531,36 +542,29 @@ namespace BaoCao
         /// <summary>
         /// 
         /// </summary>
-        private void ReadGraphFeature()
+        private void ReadGraphFeature(string filePath)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == true)
+            #region xóa dữ liệu node và edge cũ
+            for (int i = _edgeList.Count - 1; i >= 0; i--)
             {
-                string filePath = openFileDialog.FileName;
-
-                #region xoa du lieu node va edge cu
-                for (int i = _edgeList.Count - 1; i >= 0; i--)
-                {
-                    _edgeList[i].RemoveParent();
-                }
-                _edgeList.Clear();
-                for (int i = _nodeList.Count - 1; i >= 0; i--)
-                {
-                    _nodeList[i].RemoveParent();
-                }
-                _nodeList.Clear();
-                #endregion
-
-
-                List<Node> tempNodes;
-                List<Edge> tempEdges;
-                bool OddDesignModeValue = IsDesignMode;
-                IsDesignMode = true; // !IMPORTANT: không được xóa dòng này
-                Tool.ReadGraphFromFile(filePath, out tempNodes, out tempEdges, CreateNode, CreateEdge);
-                IsDesignMode = OddDesignModeValue; // !IMPORTANT: không được xóa dòng này
-                _edgeList = tempEdges;
-                _nodeList = tempNodes;
+                _edgeList[i].RemoveParent();
             }
+            _edgeList.Clear();
+            for (int i = _nodeList.Count - 1; i >= 0; i--)
+            {
+                _nodeList[i].RemoveParent();
+            }
+            _nodeList.Clear();
+            #endregion
+
+            List<Node> tempNodes;
+            List<Edge> tempEdges;
+            bool OddDesignModeValue = IsDesignMode;
+            IsDesignMode = true; // !IMPORTANT: không được xóa dòng này
+            Tool.ReadGraphFromFile(filePath, out tempNodes, out tempEdges, CreateNode, CreateEdge);
+            IsDesignMode = OddDesignModeValue; // !IMPORTANT: không được xóa dòng này
+            _edgeList = tempEdges;
+            _nodeList = tempNodes;
         }
 
     }

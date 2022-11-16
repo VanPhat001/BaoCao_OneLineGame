@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\App.xaml
-3551155247
+4-264784997
 
-191784391226
+20399129178
 13-1310406943
-MainWindow.xaml;PlayBoardWindow.xaml;SettingWindow.xaml;
+LevelWindow.xaml;MainWindow.xaml;PlayBoardWindow.xaml;SettingWindow.xaml;
 
-False
+True
 
