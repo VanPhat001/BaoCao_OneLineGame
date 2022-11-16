@@ -37,8 +37,10 @@ namespace BaoCao
         private Node _selectedNode;
         private Edge _selectedEdge;
         private List<Node> _nodeList;
-        private List<Edge> _edgeList;
+        private List<Edge> _edgeList; // danh sách Edge chứa các cung trong chế độ design và chế độ cung cố định trong chế độ chơi game
+        private List<Edge> _edgeGameDrawList; // danh sách Edge chứa các cung được vẽ trong chế độ chơi game
         private List<int> _path; // luu tru duong di theo node index
+        private Stack<int> _history; // lưu trữ lịch sử đường đi khi dùng tính năng Next hoặc Prev
 
 
         #region properties
@@ -76,11 +78,13 @@ namespace BaoCao
 
             _isDesignMode = isDesignMode;
             _path = new List<int>();
+            _history = new Stack<int>();
             _canvasGameBoard.Background = Constants.BoardBackgroundColor;
 
 
             _nodeList = new List<Node>();
             _edgeList = new List<Edge>();
+            _edgeGameDrawList = new List<Edge>();
             SelectedNode = null;
             SelectedEdge = null;
 
@@ -128,7 +132,7 @@ namespace BaoCao
                 btnRead.Click += (sender, e) =>
                 {
                     ReadGraphFeature();
-                    
+
                 };
                 _toolBar.Items.Clear();
                 _toolBar.Items.Add(btnExport);
@@ -140,9 +144,16 @@ namespace BaoCao
                 // Ngăn chặn việc xóa node, edge trong lúc chơi
                 _nodeList.ForEach(node => node.RemoveMenu());
                 _edgeList.ForEach(edge => edge.RemoveMenu());
+                _nodeList.ForEach(item => item.NodeText = item.Tag.ToString());
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CanvasGameBoard_MouseDownEvent(object sender, MouseButtonEventArgs e)
         {
             if (IsLeftCtrlDown && IsMouseLeftButtonDown)
@@ -153,6 +164,12 @@ namespace BaoCao
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CanvasGameBoard_MouseMoveEvent(object sender, MouseEventArgs e)
         {
             var pos = e.GetPosition(_canvasGameBoard);
@@ -191,6 +208,14 @@ namespace BaoCao
                             {
                                 _edgeList.Add(SelectedEdge);
                             }
+                            else // IsDesignMode==false ===> gameplay
+                            {
+                                // tạo cung thành công (đã qua ktra điều kiện)
+                                //  - thêm cung đó vào danh sách 
+                                //  - xóa lịch sử prev, next trong _history
+                                _edgeGameDrawList.Add(SelectedEdge);
+                                _history.Clear();
+                            }
                             SelectedEdge = null;
                         }
 
@@ -207,6 +232,12 @@ namespace BaoCao
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Node_ClickEvent(object sender, MouseButtonEventArgs e)
         {
             SelectedNode = sender as Node;
@@ -219,6 +250,103 @@ namespace BaoCao
                 edge.EdgeColor = Constants.EdgeColorPlay;
                 SelectedEdge = edge;
             }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Home_ButtonClickEvent(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Prev_ButtonClickEvent(object sender, RoutedEventArgs e)
+        {
+            if (_path.Count == 0)
+            {
+                return;
+            }
+            else // _path.Count >= 2  <=> _edgeGameDraw.Count >= 1
+            {
+                Edge edge = _edgeGameDrawList[_edgeGameDrawList.Count - 1];
+                //Node uNode = edge.UNode;
+                Node vNode = edge.VNode;
+
+                edge.RemoveParent();
+
+                _path.RemoveAt(_path.Count - 1);
+                _edgeGameDrawList.RemoveAt(_edgeGameDrawList.Count - 1);
+                _history.Push((int)vNode.Tag);
+
+                if (_path.Count == 1) // đường đi chỉ có 1 đỉnh không tạo thành cung ---> trạng thái đầu (prev max)
+                {
+                    _history.Push(_path[0]); // thêm vào để xử lí tình huống prev max sau đó chọn next
+                    _path.Clear();
+                }
+            }
+        }
+
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Next_ButtonClickEvent(object sender, RoutedEventArgs e)
+        {
+            // TODO: nhớ xóa lịch sử trước khi mọi điều tồi tệ hơn :)
+            // phải có lịch sử mới xóa (triển khai) được =)
+            if (_history.Count > 0)
+            {
+                int uNodeIndex = _path.Count - 1 >= 0 ? _path[_path.Count - 1] : _history.Pop();
+                int vNodeIndex = _history.Pop();
+                //int uNodeIndex, vNodeIndex;
+                //if (_path.Count - 1 >= 0) // các trạng thái sau
+                //{
+                //    uNodeIndex = _path[_path.Count - 1];
+                //    vNodeIndex = _history.Pop();
+                //}
+                //else // trạng thái đầu game
+                //{
+                //    uNodeIndex = _history.Pop();
+                //    vNodeIndex = _history.Pop();
+                //}
+
+                Node uNode = _nodeList[uNodeIndex];
+                Node vNode = _nodeList[vNodeIndex];
+
+                // bên trong hàm CreateEdge() có gọi hàm _path.Add() để thêm vNodeIndex vào _path
+                Edge edge = CreateEdge(uNode, vNode);
+                edge.EdgeColor = Constants.EdgeColorPlay;
+                _edgeGameDrawList.Add(edge);
+                // như giải thích ở trên, xóa dòng này hoặc là giữ nguyên dòn này nhưng xóa phần tử cuối của _path trước khi Add
+                //_path.Add(vNodeIndex);   
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Reset_ButtonEventClick(object sender, RoutedEventArgs e)
+        {
+            _edgeGameDrawList.ForEach(item => item.RemoveParent());
+            _edgeGameDrawList.Clear();
+            _path.Clear();
+            _history.Clear();
         }
 
 
@@ -396,6 +524,10 @@ namespace BaoCao
             #endregion
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
         private void ReadGraphFeature()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -427,5 +559,6 @@ namespace BaoCao
                 _nodeList = tempNodes;
             }
         }
+
     }
 }
