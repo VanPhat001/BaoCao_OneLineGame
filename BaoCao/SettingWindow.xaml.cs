@@ -19,7 +19,9 @@ namespace BaoCao
             _media = media; // !IMPORTANT: không được xóa hay dời dòng này
             InitializeComponent();
 
-            _chbxMusic.IsChecked = Tool.GetMediaState(_media) == MediaState.Play;            
+            _chbxMusic.IsChecked = Tool.GetMediaState(_media) == MediaState.Play;
+            _chbxMusic.Checked += Music_CheckboxCheckedEvent;
+            _chbxMusic.Unchecked += Music_CheckboxUnCheckedEvent;
 
             // _media.Volume <=> _slider.Value
             _slider.SetBinding(Slider.ValueProperty,

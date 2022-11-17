@@ -77,7 +77,7 @@ namespace BaoCao
         /// 
         /// </summary>
         /// <param name="isDesignMode"></param>
-        public PlayBoardWindow(bool isDesignMode, string levelFilePath="")
+        public PlayBoardWindow(bool isDesignMode, string levelFilePath = "")
         {
             InitializeComponent();
 
@@ -219,7 +219,6 @@ namespace BaoCao
 
                         if (SelectedEdge != null)
                         {
-                            SelectedEdge.EdgeColor = Constants.EdgeColorPlay;
                             if (IsDesignMode)
                             {
                                 _edgeList.Add(SelectedEdge);
@@ -229,6 +228,7 @@ namespace BaoCao
                                 // tạo cung thành công (đã qua ktra điều kiện)
                                 //  - thêm cung đó vào danh sách 
                                 //  - xóa lịch sử prev, next trong _history
+                                SelectedEdge.EdgeColor = Constants.EdgeColorPlay;
                                 _edgeGameDrawList.Add(SelectedEdge);
                                 _history.Clear();
                             }
@@ -443,6 +443,7 @@ namespace BaoCao
              *      + nếu path = {} thì cung đó không cần xét gì nữa
              *      + không được quay đầu
              *      + uNode phải khớp với _path.back()
+             *      + cung đầu tiên luôn hợp lệ (phải thõa mãn có cung (uNode, vNode))
              */
             Edge edge;
             if (IsDesignMode)
@@ -454,13 +455,31 @@ namespace BaoCao
             }
 
 
-            // TODO: xu li du kien dau bai ve viec gameplay
+            // TODO: xử lí dữ kiện đầu bài về chế độ gameplay
             #region IsDesignMode==false // GamePlay process
             int uNodeIndex = (int)u.Tag;
             int vNodeIndex = (int)v.Tag;
             bool canCreateEdge = true;
-            //*cung dau tien luon hop le,
-            if (_path.Count == 0)
+            bool foundEdgeInMap = false;
+
+            #region kiểm tra cung có trên bản đồ gốc
+            foreach (Edge edgeItem in _edgeList)
+            {
+                int uItemIndex = (int)edgeItem.UNode.Tag;
+                int vItemIndex = (int)edgeItem.VNode.Tag;
+                if ((uItemIndex == uNodeIndex && vItemIndex == vNodeIndex) || (uItemIndex == vNodeIndex && vItemIndex == uNodeIndex))
+                {
+                    foundEdgeInMap = true;
+                    break;
+                }
+            }
+            #endregion
+
+            if (!foundEdgeInMap) // không có trên bản đồ gốc --> không thể vẽ
+            {
+                canCreateEdge = false;
+            }
+            else if (_path.Count == 0) // cung đầu tiên luôn hợp lệ và tồn tại cung trên bản đồ gốc (đã xét ở trên)
             {
                 _path.Add(uNodeIndex);
                 //_path.Add(vNodeIndex);
@@ -470,62 +489,32 @@ namespace BaoCao
             {
                 int back = _path[_path.Count - 1];
 
-                #region kiem tra ve tiep
+                #region kiểm tra vẽ tiếp
                 if (back != uNodeIndex)
                 {
                     canCreateEdge = false;
-                    //return null;
                 }
                 #endregion
 
-                #region kiem tra quay dau
+                #region kiểm tra quay đầu
                 if (back == vNodeIndex)
                 {
                     canCreateEdge = false;
-                    //return null;
                 }
                 #endregion
 
-                #region cung ton tai tren man choi va chua di qua
-                bool found = false;
-                foreach (Edge edgeItem in _edgeList)
+                #region cung tồn tại trong màn chơi (đã xét ở trên) và chưa đi qua
+                for (int i = 1; i < _path.Count; i++)
                 {
-                    int uItemIndex = (int)edgeItem.UNode.Tag;
-                    int vItemIndex = (int)edgeItem.VNode.Tag;
-                    if ((uItemIndex == uNodeIndex && vItemIndex == vNodeIndex) || (uItemIndex == vNodeIndex && vItemIndex == uNodeIndex))
+                    int p1 = _path[i];
+                    int p2 = _path[i - 1];
+                    if ((p1 == uNodeIndex && p2 == vNodeIndex) || (p1 == vNodeIndex && p2 == uNodeIndex))
                     {
-                        found = true;
+                        canCreateEdge = false;
+                        break;
                     }
-                }
-                //_edgeList.ForEach(edgeItem =>
-                //{
-                //    int uItemIndex = (int)edgeItem.UNode.Tag;
-                //    int vItemIndex = (int)edgeItem.VNode.Tag;
-                //    if ((uItemIndex == uNodeIndex && vItemIndex == vNodeIndex) || (uItemIndex == vNodeIndex && vItemIndex == uNodeIndex))
-                //    {
-                //        found = true;
-                //    }
-                //});
-                if (found)
-                {
-                    for (int i = 1; i < _path.Count; i++)
-                    {
-                        int p1 = _path[i];
-                        int p2 = _path[i - 1];
-                        if ((p1 == uNodeIndex && p2 == vNodeIndex) || (p1 == vNodeIndex && p2 == uNodeIndex))
-                        {
-                            canCreateEdge = false;
-                            //return null;
-                        }
-                    }
-                }
-                else
-                {
-                    canCreateEdge = false;
-                    //return null;
-                }
+                }               
                 #endregion
-
             }
 
             if (canCreateEdge)
