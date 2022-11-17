@@ -31,8 +31,8 @@ namespace BaoCao
         {
             InitializeComponent();
 
-            _media = new MediaElement();
-            _media.Source = new Uri("nhacnen2.mp3", UriKind.Relative);
+            _media = new MediaElement() { Width = 0, Height = 0 };
+            _media.Source = new Uri(System.IO.Path.Combine(Constants.MusicPath, "Sariel.mp3"), UriKind.Relative);
             _media.LoadedBehavior = MediaState.Manual;
             _media.UnloadedBehavior = MediaState.Stop;
 

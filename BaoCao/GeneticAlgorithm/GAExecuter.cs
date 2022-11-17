@@ -16,33 +16,33 @@ namespace BaoCao.GeneticAlgorithm
         /// <param name="filePath"></param>
         public void Excute(string filePath)
         {
-            System.Console.WriteLine("Start");
+            Debug.WriteLine("Start");
             #region read data - build graph
             Graph graph;
             ReadData(filePath, out graph);
             #endregion
 
-            System.Console.WriteLine("Running...");
+            Debug.WriteLine("Running...");
             #region GA_Algorithm
             Stopwatch watch = new Stopwatch();
             watch.Start();
 
-            CaThe goal = null;
+            Individual goal = null;
             GeneticAlgorithm ga = new GeneticAlgorithm(
                         graph,
                         quanTheSize: 30,
                         quanTheMax: 3000,
                         survivalPercent: 0.7f,
                         couplePercent: 0.4f);
-            int theHe = 0;
+            int generation = 0;
 
             // O(k * N * graph.M)
             while (true)
             {
-                Debug.WriteLine("The he: " + (++theHe));
+                Debug.WriteLine("Generation: " + (++generation));
 
                 // (*) O(Max(N, _chilren.Count * graph.M)) ~ O(N * graph.M)
-                ga.TinhThichNghi2(out goal);
+                ga.ScoreFitness2(out goal);
                 if (goal != null)
                 {
                     Debug.WriteLine("found");
@@ -50,13 +50,13 @@ namespace BaoCao.GeneticAlgorithm
                 }
 
                 // O(Max( deadNumber * N, graph.M * N ))
-                ga.ChonLocTuNhien();
+                ga.Selection();
 
                 // O(Max(coupleNumber * Max(N, graph.M), _children.Count))
-                ga.LaiTao2();
+                ga.CrossOver2();
 
                 // O(_children.Count)
-                ga.DotBien();
+                ga.Mutation();
             }
 
             watch.Stop();
@@ -80,34 +80,34 @@ namespace BaoCao.GeneticAlgorithm
         public async Task<List<int>> ExcuteAsync(List<Node> nodeList, List<Objects.Edge> edgeList)
         {
             await Task.Delay(1);
-            System.Console.WriteLine("Start");
+            Debug.WriteLine("Start");
             #region read data - build graph
             var graph = new Structures.Graph(nodeList.Count);
             edgeList.ForEach(edge => graph.AddEdge((int)edge.UNode.Tag, (int)edge.VNode.Tag));
             #endregion
 
             //await Task.Delay(1);
-            System.Console.WriteLine("Running...");
+            Debug.WriteLine("Running...");
             #region GA_Algorithm
             Stopwatch watch = new Stopwatch();
             watch.Start();
 
-            CaThe goal = null;
+            Individual goal = null;
             GeneticAlgorithm ga = new GeneticAlgorithm(
                         graph,
                         quanTheSize: 30,
                         quanTheMax: 3000,
                         survivalPercent: 0.7f,
                         couplePercent: 0.4f);
-            int theHe = 0;
+            int generation = 0;
 
             // O(k * N * graph.M)
             while (true)
             {
-                Debug.WriteLine("The he: " + (++theHe));
+                Debug.WriteLine("Generation: " + (++generation));
 
                 // (*) O(Max(N, _chilren.Count * graph.M)) ~ O(N * graph.M)
-                ga.TinhThichNghi2(out goal);
+                ga.ScoreFitness2(out goal);
                 if (goal != null)
                 {
                     Debug.WriteLine("found");
@@ -115,13 +115,13 @@ namespace BaoCao.GeneticAlgorithm
                 }
 
                 // O(Max( deadNumber * N, graph.M * N ))
-                ga.ChonLocTuNhien();
+                ga.Selection();
 
                 // O(Max(coupleNumber * Max(N, graph.M), _children.Count))
-                ga.LaiTao2();
+                ga.CrossOver2();
 
                 // O(_children.Count)
-                ga.DotBien();
+                ga.Mutation();
 
                 //await Task.Delay(1);
             }
@@ -179,7 +179,7 @@ namespace BaoCao.GeneticAlgorithm
             var args = s.Split(' ');
             if (!Int32.TryParse(args[0], out a) || !Int32.TryParse(args[1], out b))
             {
-                throw new Exception("can not convert to int");
+                throw new Exception("can not convert string to int");
             }
         }
     }

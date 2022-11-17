@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bin/debug/resources/levels/level_2.txt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bin/debug/resources/musics/sariel.mp3")]
 
 

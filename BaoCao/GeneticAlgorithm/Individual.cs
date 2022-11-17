@@ -4,20 +4,20 @@ using System.Collections.Generic;
 
 namespace BaoCao.GeneticAlgorithm
 {
-    public class CaThe
+    public class Individual
     {
         private string _genString;
         public List<int> Gen { get; set; }
         private List<int> _errorIndexList;
         public List<int> ErrorIndexList { get => _errorIndexList; private set => _errorIndexList = value; }
-        public int DoThichNghi => ErrorIndexList.Count;
+        public int Fitness => ErrorIndexList.Count;
 
 
         /// <summary>
         /// 
         /// </summary>
 
-        public CaThe()
+        public Individual()
         {
             Gen = new List<int>();
             ErrorIndexList = new List<int>();
@@ -146,14 +146,14 @@ namespace BaoCao.GeneticAlgorithm
         }
     }
 
-    public class CaTheComparer : IEqualityComparer<CaThe>
+    public class CaTheComparer : IEqualityComparer<Individual>
     {
-        public bool Equals(CaThe x, CaThe y)
+        public bool Equals(Individual x, Individual y)
         {
             return x.ToString() == y.ToString();
         }
 
-        public int GetHashCode(CaThe obj)
+        public int GetHashCode(Individual obj)
         {
             return obj.ToString().GetHashCode();
         }

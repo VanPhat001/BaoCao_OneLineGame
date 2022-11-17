@@ -56,10 +56,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Constants.cs" />
-    <Compile Include="GeneticAlgorithm\CaThe.cs" />
+    <Compile Include="GeneticAlgorithm\Individual.cs" />
     <Compile Include="GeneticAlgorithm\GAExecuter.cs" />
     <Compile Include="GeneticAlgorithm\GeneticAlgorithm.cs" />
-    <Compile Include="GeneticAlgorithm\QuanThe.cs" />
+    <Compile Include="GeneticAlgorithm\Population.cs" />
     <Compile Include="LevelWindow.xaml.cs">
       <DependentUpon>LevelWindow.xaml</DependentUpon>
     </Compile>
@@ -128,7 +128,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\Resources\Levels\" />
-    <Folder Include="bin\Debug\Resources\Musics\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\Resources\Musics\Sariel.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

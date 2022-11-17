@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace BaoCao
 {
@@ -24,6 +25,20 @@ namespace BaoCao
         public static int Random(int size)
         {
             return rand.Next(size);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="g"></param>
+        /// <param name="b"></param>
+        /// <param name="alpha"></param>
+        /// <returns></returns>
+        public static Brush ColorRGB(int r, int g, int b, int alpha = 255)
+        {
+            return new SolidColorBrush(Color.FromArgb((byte)alpha, (byte)r, (byte)g, (byte)b));
         }
 
 

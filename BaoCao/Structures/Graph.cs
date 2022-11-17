@@ -44,8 +44,8 @@ namespace BaoCao.Structures
         {
             if (!Adjacent(u, v))
             {
-                _matrix[u][v] = true;
-                _matrix[v][u] = true;
+                Matrix[u][v] = true;
+                Matrix[v][u] = true;
                 M++;
                 EdgeList.Add(new Edge(u, v));
                 return true;
@@ -63,7 +63,7 @@ namespace BaoCao.Structures
         /// <returns></returns>
         public bool Adjacent(int u, int v)
         {
-            return _matrix[u][v];
+            return Matrix[u][v];
         }
     }
 }
