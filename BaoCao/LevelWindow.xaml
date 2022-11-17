@@ -5,17 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BaoCao"
         mc:Ignorable="d"
-        Title="LevelWindow" Height="450" Width="470">
-    <Grid Background="PowderBlue">
-        <ScrollViewer>
-            <StackPanel Margin="70,50,70,50" Name="_stackPnlLevels" >
-                <StackPanel.Resources>
-                    <Style TargetType="Button">
-                        <Setter Property="Margin" Value="0,15,0,0"/>
-                        <Setter Property="Height" Value="50" />
-                        <Setter Property="FontSize" Value="20" />
-                    </Style>
-                </StackPanel.Resources>
+        Title="LevelWindow" Height="530" Width="470">
+    <Grid Background="BurlyWood">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition />
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="60,16,60,0"/>
+                <Setter Property="Height" Value="45" />
+                <Setter Property="FontSize" Value="28" />
+                <Setter Property="FontFamily" Value="Mistral" />
+                <Setter Property="Background" Value="#FFC59C43" />
+                <Setter Property="BorderBrush" Value="#FF060606" />
+            </Style>
+        </Grid.Resources>
+
+        <TextBlock Text="Choose level" FontSize="34" FontFamily="Mistral" VerticalAlignment="Bottom" Margin="20,00,0,0"/>
+
+        <ScrollViewer Grid.Row="1" Margin="0,14">
+            <StackPanel Name="_stackPnlLevels" >
                 <Button>Button 1</Button>
                 <Button>Button 2</Button>
                 <Button>Button 3</Button>
@@ -26,6 +37,8 @@
                 <Button>Button 8</Button>
             </StackPanel>
         </ScrollViewer>
-        
+
+        <Button Grid.Row="2" Content="back" Height="38" Width="110" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Click="Back_ButtonClickEvent"/>
+
     </Grid>
 </Window>

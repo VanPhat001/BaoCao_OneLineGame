@@ -142,7 +142,11 @@ namespace BaoCao
                         ReadGraphFeature(openFileDialog.FileName);
                     }
                 };
-                _toolBar.Items.Clear();
+
+                btnExport.Style = Application.Current.FindResource("ToolBarButtonStyle") as Style;
+                btnRead.Style = Application.Current.FindResource("ToolBarButtonStyle") as Style;
+
+                _toolBar.Items.Clear();                
                 _toolBar.Items.Add(btnExport);
                 _toolBar.Items.Add(btnRead);
             }

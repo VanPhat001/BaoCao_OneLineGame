@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:BaoCao"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="ToolBarButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="28" />
+            <Setter Property="FontFamily" Value="Mistral" />
+            <Setter Property="Padding" Value="16,0" />
+            <Setter Property="BorderBrush" Value="#FF060606" />
+        </Style>
     </Application.Resources>
 </Application>

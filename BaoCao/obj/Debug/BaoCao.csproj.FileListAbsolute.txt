@@ -60,3 +60,5 @@ C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\BaoCao.ex
 C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\BaoCao.pdb
 C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\LevelWindow.g.cs
 C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\LevelWindow.baml
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\BaoCao_Content.g.cs
+C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\App.baml

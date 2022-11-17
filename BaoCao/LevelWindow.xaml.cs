@@ -53,5 +53,11 @@ namespace BaoCao
                 _stackPnlLevels.Children.Add(btn);
             }
         }
+
+        private void Back_ButtonClickEvent(object sender, RoutedEventArgs e)
+        {
+            LevelFilePath = "";
+            this.Close();
+        }
     }
 }
