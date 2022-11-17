@@ -102,14 +102,11 @@ namespace BaoCao
                 Button btnExport = new Button()
                 {
                     Content = "Export",
-                    Margin = new Thickness(0),
                     Height = 45,
                     Width = 120,
-                    FontSize = 24,
                     FontFamily = new FontFamily("Mistral"),
                     FontWeight = FontWeight.FromOpenTypeWeight(500),
-                    HorizontalContentAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center
+                    Style = Application.Current.FindResource("ToolBarButtonStyle") as Style
                 };
                 btnExport.Click += (sender, e) =>
                 {
@@ -125,14 +122,11 @@ namespace BaoCao
                 Button btnRead = new Button()
                 {
                     Content = "Read",
-                    Margin = new Thickness(0),
                     Height = 45,
                     Width = 120,
-                    FontSize = 24,
                     FontFamily = new FontFamily("Mistral"),
                     FontWeight = FontWeight.FromOpenTypeWeight(500),
-                    HorizontalContentAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center
+                    Style = Application.Current.FindResource("ToolBarButtonStyle") as Style
                 };
                 btnRead.Click += (sender, e) =>
                 {
@@ -143,12 +137,48 @@ namespace BaoCao
                     }
                 };
 
-                btnExport.Style = Application.Current.FindResource("ToolBarButtonStyle") as Style;
-                btnRead.Style = Application.Current.FindResource("ToolBarButtonStyle") as Style;
+                Button btnHome = new Button()
+                {
+                    Content = "Home",
+                    Height = 45,
+                    Width = 120,
+                    FontFamily = new FontFamily("Mistral"),
+                    FontWeight = FontWeight.FromOpenTypeWeight(500),
+                    Style = Application.Current.FindResource("ToolBarButtonStyle") as Style
+                };
+                btnHome.Click += Home_ButtonClickEvent;
 
-                _toolBar.Items.Clear();                
+                Button btnClear = new Button()
+                {
+                    Content = "Clear",
+                    Height = 45,
+                    Width = 120,
+                    FontFamily = new FontFamily("Mistral"),
+                    FontWeight = FontWeight.FromOpenTypeWeight(500),
+                    Style = Application.Current.FindResource("ToolBarButtonStyle") as Style
+                };
+                btnClear.Click += async (sender, e) =>
+                {
+                    for (int i = _edgeList.Count - 1; i >= 0; i--)
+                    {
+                        _edgeList[i].RemoveParent();
+                        await System.Threading.Tasks.Task.Delay(20);
+                    }
+                    _edgeList.Clear();
+
+                    for (int i = _nodeList.Count - 1; i >= 0; i--)
+                    {
+                        _nodeList[i].RemoveParent();
+                        await System.Threading.Tasks.Task.Delay(20);
+                    }
+                    _nodeList.Clear();
+                };
+
+                _toolBar.Items.Clear();
+                _toolBar.Items.Add(btnHome);
                 _toolBar.Items.Add(btnExport);
                 _toolBar.Items.Add(btnRead);
+                _toolBar.Items.Add(btnClear);
             }
             else // isDesignMode == false ---> che do choi game
             {
@@ -361,7 +391,10 @@ namespace BaoCao
         /// <param name="e"></param>
         private void Reset_ButtonEventClick(object sender, RoutedEventArgs e)
         {
-            _edgeGameDrawList.ForEach(item => item.RemoveParent());
+            for (int i = _edgeGameDrawList.Count - 1; i >= 0; i--)
+            {
+                _edgeGameDrawList[i].RemoveParent();
+            }
             _edgeGameDrawList.Clear();
             _path.Clear();
             _history.Clear();
@@ -517,7 +550,7 @@ namespace BaoCao
                         canCreateEdge = false;
                         break;
                     }
-                }               
+                }
                 #endregion
             }
 
@@ -552,6 +585,7 @@ namespace BaoCao
                 _edgeList[i].RemoveParent();
             }
             _edgeList.Clear();
+
             for (int i = _nodeList.Count - 1; i >= 0; i--)
             {
                 _nodeList[i].RemoveParent();
