@@ -98,103 +98,11 @@ namespace BaoCao
 
             if (isDesignMode) // che do thiet ke man choi
             {
-                // TODO: chinh sua giao dien, them nut export vao giao dien
-                Button btnExport = new Button()
-                {
-                    Content = "Export",
-                    Height = 45,
-                    Width = 120,
-                    FontFamily = new FontFamily("Mistral"),
-                    FontWeight = FontWeight.FromOpenTypeWeight(500),
-                    Style = Application.Current.FindResource("ToolBarButtonStyle") as Style
-                };
-                btnExport.Click += (sender, e) =>
-                {
-                    SaveFileDialog saveFileDialog = new SaveFileDialog();
-                    if (saveFileDialog.ShowDialog() == true)
-                    {
-                        string filePath = saveFileDialog.FileName;
-                        Tool.ExportGraphToFile(filePath, _nodeList, _edgeList);
-                    }
-                };
-
-                // TODO: chinh sua giao dien, them nut read vao giao dien
-                Button btnRead = new Button()
-                {
-                    Content = "Read",
-                    Height = 45,
-                    Width = 120,
-                    FontFamily = new FontFamily("Mistral"),
-                    FontWeight = FontWeight.FromOpenTypeWeight(500),
-                    Style = Application.Current.FindResource("ToolBarButtonStyle") as Style
-                };
-                btnRead.Click += (sender, e) =>
-                {
-                    OpenFileDialog openFileDialog = new OpenFileDialog();
-                    if (openFileDialog.ShowDialog() == true)
-                    {
-                        ReadGraphFeature(openFileDialog.FileName);
-                    }
-                };
-
-                Button btnHome = new Button()
-                {
-                    Content = "Home",
-                    Height = 45,
-                    Width = 120,
-                    FontFamily = new FontFamily("Mistral"),
-                    FontWeight = FontWeight.FromOpenTypeWeight(500),
-                    Style = Application.Current.FindResource("ToolBarButtonStyle") as Style
-                };
-                btnHome.Click += Home_ButtonClickEvent;
-
-                Button btnClear = new Button()
-                {
-                    Content = "Clear",
-                    Height = 45,
-                    Width = 120,
-                    FontFamily = new FontFamily("Mistral"),
-                    FontWeight = FontWeight.FromOpenTypeWeight(500),
-                    Style = Application.Current.FindResource("ToolBarButtonStyle") as Style
-                };
-                btnClear.Click += async (sender, e) =>
-                {
-                    for (int i = _edgeList.Count - 1; i >= 0; i--)
-                    {
-                        _edgeList[i].RemoveParent();
-                        await System.Threading.Tasks.Task.Delay(20);
-                    }
-                    _edgeList.Clear();
-
-                    for (int i = _nodeList.Count - 1; i >= 0; i--)
-                    {
-                        _nodeList[i].RemoveParent();
-                        await System.Threading.Tasks.Task.Delay(20);
-                    }
-                    _nodeList.Clear();
-                };
-
-                _toolBar.Items.Clear();
-                _toolBar.Items.Add(btnHome);
-                _toolBar.Items.Add(btnExport);
-                _toolBar.Items.Add(btnRead);
-                _toolBar.Items.Add(btnClear);
+                InitDesignMode();
             }
             else // isDesignMode == false ---> che do choi game
             {
-                // đường dẫn luôn đúng, không cần kiểm tra
-                //bool exists = System.IO.File.Exists(fileLevelPath);
-                //if (!exists)
-                //{
-                //    MessageBox.Show("Đường dẫn không hợp lệ!");
-                //    return;
-                //}
-
-                ReadGraphFeature(levelFilePath);
-                // Ngăn chặn việc xóa node, edge trong lúc chơi
-                _nodeList.ForEach(node => node.RemoveMenu());
-                _edgeList.ForEach(edge => edge.RemoveMenu());
-                _nodeList.ForEach(item => item.NodeText = item.Tag.ToString());
+                InitGameMode(levelFilePath);
             }
         }
 
@@ -224,7 +132,7 @@ namespace BaoCao
         {
             var pos = e.GetPosition(_canvasGameBoard);
 
-            // doi node
+            // di chuyển node
             if (IsDesignMode && SelectedNode != null && IsLeftAltDown
                 && SelectedNode.CheckPointIn(pos)
                 && IsMouseLeftButtonDown)
@@ -232,7 +140,7 @@ namespace BaoCao
                 SelectedNode.SetCenterLocation(pos);
             }
 
-            // ve cung :))
+            // vẽ cung :))
             if (SelectedEdge != null && IsLeftShiftDown && IsMouseLeftButtonDown)
             {
                 SelectedEdge.SetEndPoint(pos);
@@ -244,7 +152,7 @@ namespace BaoCao
                 {
                     if (node.CheckPointIn(pos) && node != SelectedEdge.UNode)
                     {
-                        // accept edge 
+                        // tạo và liên kết edge(uNode, vNode) thành công
                         Node uNode = SelectedEdge.UNode;
                         Node vNode = node;
 
@@ -273,7 +181,7 @@ namespace BaoCao
                         break;
                     }
                 }
-                // huy cung
+                // hủy cung do không tìm được node để liên kết edge(uNode, null)
                 if (!IsAccept)
                 {
                     SelectedEdge.RemoveParent();
@@ -603,5 +511,116 @@ namespace BaoCao
             _nodeList = tempNodes;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitDesignMode()
+        {
+            // TODO: chinh sua giao dien, them nut export vao giao dien
+            Button btnExport = new Button()
+            {
+                Content = "Export",
+                Height = 45,
+                Width = 120,
+                FontFamily = new FontFamily("Mistral"),
+                FontWeight = FontWeight.FromOpenTypeWeight(500),
+                Style = Application.Current.FindResource("ToolBarButtonStyle") as Style
+            };
+            btnExport.Click += (sender, e) =>
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    string filePath = saveFileDialog.FileName;
+                    Tool.ExportGraphToFile(filePath, _nodeList, _edgeList);
+                }
+            };
+
+            // TODO: chinh sua giao dien, them nut read vao giao dien
+            Button btnRead = new Button()
+            {
+                Content = "Read",
+                Height = 45,
+                Width = 120,
+                FontFamily = new FontFamily("Mistral"),
+                FontWeight = FontWeight.FromOpenTypeWeight(500),
+                Style = Application.Current.FindResource("ToolBarButtonStyle") as Style
+            };
+            btnRead.Click += (sender, e) =>
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    ReadGraphFeature(openFileDialog.FileName);
+                }
+            };
+
+            // TODO: chinh sua giao dien, them nut home vao giao dien
+            Button btnHome = new Button()
+            {
+                Content = "Home",
+                Height = 45,
+                Width = 120,
+                FontFamily = new FontFamily("Mistral"),
+                FontWeight = FontWeight.FromOpenTypeWeight(500),
+                Style = Application.Current.FindResource("ToolBarButtonStyle") as Style
+            };
+            btnHome.Click += Home_ButtonClickEvent;
+
+            // TODO: chinh sua giao dien, them nut clear vao giao dien
+            Button btnClear = new Button()
+            {
+                Content = "Clear",
+                Height = 45,
+                Width = 120,
+                FontFamily = new FontFamily("Mistral"),
+                FontWeight = FontWeight.FromOpenTypeWeight(500),
+                Style = Application.Current.FindResource("ToolBarButtonStyle") as Style
+            };
+            btnClear.Click += async (sender, e) =>
+            {
+                for (int i = _edgeList.Count - 1; i >= 0; i--)
+                {
+                    _edgeList[i].RemoveParent();
+                    await System.Threading.Tasks.Task.Delay(20);
+                }
+                _edgeList.Clear();
+
+                for (int i = _nodeList.Count - 1; i >= 0; i--)
+                {
+                    _nodeList[i].RemoveParent();
+                    await System.Threading.Tasks.Task.Delay(20);
+                }
+                _nodeList.Clear();
+            };
+
+            _toolBar.Items.Clear();
+            _toolBar.Items.Add(btnHome);
+            _toolBar.Items.Add(btnExport);
+            _toolBar.Items.Add(btnRead);
+            _toolBar.Items.Add(btnClear);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitGameMode(string levelFilePath)
+        {
+            // đường dẫn luôn đúng, không cần kiểm tra
+            //bool exists = System.IO.File.Exists(fileLevelPath);
+            //if (!exists)
+            //{
+            //    MessageBox.Show("Đường dẫn không hợp lệ!");
+            //    return;
+            //}
+
+            ReadGraphFeature(levelFilePath);
+            // Ngăn chặn việc xóa node, edge trong lúc chơi
+            _nodeList.ForEach(node => node.RemoveMenu());
+            _edgeList.ForEach(edge => edge.RemoveMenu());
+            _nodeList.ForEach(item => item.NodeText = item.Tag.ToString());
+        }
     }
 }
