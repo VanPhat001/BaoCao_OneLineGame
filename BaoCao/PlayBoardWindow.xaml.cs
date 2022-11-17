@@ -622,5 +622,11 @@ namespace BaoCao
             _edgeList.ForEach(edge => edge.RemoveMenu());
             _nodeList.ForEach(item => item.NodeText = item.Tag.ToString());
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            HelpBoard helpBoard = new HelpBoard();
+            helpBoard.ShowDialog();
+        }
     }
 }

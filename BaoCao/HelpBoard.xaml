@@ -1,0 +1,21 @@
+﻿<Window x:Name="HelpBoard1" x:Class="BaoCao.HelpBoard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BaoCao"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="HelpBoard" Height="450" Width="450" Background="BurlyWood">
+    <Grid Margin="0,0,1,0">
+        <TextBox HorizontalAlignment="Left" Height="40" Margin="79,23,0,0" TextWrapping="Wrap" Text="Ctrl + left mouse click to create node" VerticalAlignment="Top" Width="280" Background="#FFC59C43" FontSize="14"/>
+        <TextBox HorizontalAlignment="Left" Height="40" Margin="79,66,0,0" TextWrapping="Wrap" Text="Alt + left mouse move to MOVE node" VerticalAlignment="Top" Width="280" Background="#FFC59C43" FontSize="14"/>
+        <TextBox HorizontalAlignment="Left" Height="40" Margin="79,110,0,0" TextWrapping="Wrap" Text="Right click in the node and choose remove button to delete node" VerticalAlignment="Top" Width="280" Background="#FFC59C43" FontSize="14"/>
+        <TextBox HorizontalAlignment="Left" Height="40" Margin="79,155,0,0" TextWrapping="Wrap" Text="Select node, hold shift and move mouse to the node needs add edge" VerticalAlignment="Top" Width="280" Background="#FFC59C43" FontSize="14"/>
+        <TextBox HorizontalAlignment="Left" Height="40" Margin="79,201,0,0" TextWrapping="Wrap" Text="Right click in the edge, choose remove button to delete edge" VerticalAlignment="Top" Width="280" Background="#FFC59C43" FontSize="14"/>
+        <TextBox HorizontalAlignment="Left" Height="40" Margin="79,248,0,0" TextWrapping="Wrap" Text="Select SOLVE button if you don't find the solution
+        " VerticalAlignment="Top" Width="280" Background="#FFC59C43" FontSize="14"/>
+        <Button x:Name="help_back_btn" Content="Back" HorizontalAlignment="Left" Margin="288,351,0,0" VerticalAlignment="Top" Width="110" Height="38" Background="#FFC59C43" FontFamily="Mistral" FontSize="24" Click="help_back_btn_Click"/>
+
+    </Grid>
+</Window>

@@ -17,7 +17,7 @@
                 <Button Style="{StaticResource ToolBarButtonStyle}" Click="Next_ButtonClickEvent" >Next</Button>
                 <Button Style="{StaticResource ToolBarButtonStyle}" Click="Reset_ButtonEventClick" >Reset</Button>
                 <Button Style="{StaticResource ToolBarButtonStyle}" Click="Solve_ButtonClickEvent" >Solve</Button>
-                <Button Style="{StaticResource ToolBarButtonStyle}" >Help</Button>
+                <Button Style="{StaticResource ToolBarButtonStyle}" Click="Button_Click" >Help</Button>
             </ToolBar>
         </ToolBarTray>
 

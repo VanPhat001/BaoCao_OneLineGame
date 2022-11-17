@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\obj\Debug\
+D:\BaocaoFinal1\BaoCao\obj\Debug\
 BaoCao
 none
 false
 DEBUG;TRACE
-C:\Users\Admin\Desktop\BaoCao_temp\OneLineGameProject\BaoCao\App.xaml
-4-264784997
-1-1112268385
-20-523323701
+D:\BaocaoFinal1\BaoCao\App.xaml
+5-708491916
+2-1220438572
+211540523290
 13-1310406943
-LevelWindow.xaml;MainWindow.xaml;PlayBoardWindow.xaml;SettingWindow.xaml;
+HelpBoard.xaml;LevelWindow.xaml;MainWindow.xaml;PlayBoardWindow.xaml;SettingWindow.xaml;
 
-False
+True
 
