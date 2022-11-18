@@ -6,16 +6,38 @@
         xmlns:local="clr-namespace:BaoCao"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="HelpBoard" Height="450" Width="450" Background="BurlyWood">
+        Title="HelpBoard" Height="500" Width="450" Background="BurlyWood">
     <Grid Margin="0,0,1,0">
-        <TextBox HorizontalAlignment="Left" Height="40" Margin="79,23,0,0" TextWrapping="Wrap" Text="Ctrl + left mouse click to create node" VerticalAlignment="Top" Width="280" Background="#FFC59C43" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Height="40" Margin="79,66,0,0" TextWrapping="Wrap" Text="Alt + left mouse move to MOVE node" VerticalAlignment="Top" Width="280" Background="#FFC59C43" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Height="40" Margin="79,110,0,0" TextWrapping="Wrap" Text="Right click in the node and choose remove button to delete node" VerticalAlignment="Top" Width="280" Background="#FFC59C43" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Height="40" Margin="79,155,0,0" TextWrapping="Wrap" Text="Select node, hold shift and move mouse to the node needs add edge" VerticalAlignment="Top" Width="280" Background="#FFC59C43" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Height="40" Margin="79,201,0,0" TextWrapping="Wrap" Text="Right click in the edge, choose remove button to delete edge" VerticalAlignment="Top" Width="280" Background="#FFC59C43" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Height="40" Margin="79,248,0,0" TextWrapping="Wrap" Text="Select SOLVE button if you don't find the solution
-        " VerticalAlignment="Top" Width="280" Background="#FFC59C43" FontSize="14"/>
-        <Button x:Name="help_back_btn" Content="Back" HorizontalAlignment="Left" Margin="288,351,0,0" VerticalAlignment="Top" Width="110" Height="38" Background="#FFC59C43" FontFamily="Mistral" FontSize="24" Click="help_back_btn_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="58"/>
+        </Grid.RowDefinitions>
+        
+        
+        <StackPanel>
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Height" Value="50" />
+                    <Setter Property="Margin" Value="0,10,0,0" />
+                    <Setter Property="Width" Value="350" />
+                    <Setter Property="TextWrapping" Value="Wrap"/>
+                    <Setter Property="Background" Value="#FFC59C43" />
+                    <Setter Property="FontSize" Value="18"/>
+                    
+                </Style>
+            </StackPanel.Resources>
+
+            <TextBlock Margin="0,40,0,0" Text="Ctrl + left mouse click to create node"  />
+            <TextBlock Text="Alt + left mouse move to MOVE node" />
+            <TextBlock Text="Right click in the node and choose remove button to delete node" />
+            <TextBlock Text="Select node, hold shift and move mouse to the node needs add edge" />
+            <TextBlock Text="Right click in the edge, choose remove button to delete edge" />
+            <TextBlock Text="Select SOLVE button if you don't find the solution"  />
+        </StackPanel>
+
+
+
+        <Button Grid.Row="1" Content="Back" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="110" Height="38" Background="#FFC59C43" FontFamily="Mistral" FontSize="24" Click="help_back_btn_Click" Margin="0,0,10,10"/>
 
     </Grid>
 </Window>

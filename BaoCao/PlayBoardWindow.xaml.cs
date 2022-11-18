@@ -286,7 +286,7 @@ namespace BaoCao
                 Edge edge = CreateEdge(uNode, vNode);
                 edge.EdgeColor = Constants.EdgeColorPlay;
                 _edgeGameDrawList.Add(edge);
-                // như giải thích ở trên, xóa dòng này hoặc là giữ nguyên dòn này nhưng xóa phần tử cuối của _path trước khi Add
+                // như giải thích ở trên, xóa dòng này hoặc là giữ nguyên dòng này nhưng xóa phần tử cuối của _path trước khi Add
                 //_path.Add(vNodeIndex);   
             }
         }
@@ -329,7 +329,7 @@ namespace BaoCao
             BaoCao.Utils.Animation animation = new Utils.Animation(_nodeList, _edgeList, path);
             await animation.ShowAnimationAsync();
 
-            MessageBox.Show("Complete");
+            MessageBox.Show("Dễ vậy mà cũng không giải được 😏 😏 😏");
             animation.ClearAnimation();
         }
 

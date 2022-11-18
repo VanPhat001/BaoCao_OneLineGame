@@ -23,7 +23,7 @@
             </Style>
         </Grid.Resources>
 
-        <TextBlock Text="Choose level" FontSize="34" FontFamily="Mistral" VerticalAlignment="Bottom" Margin="20,00,0,0"/>
+        <TextBlock Text="Choose level" FontSize="40" FontFamily="Mistral" VerticalAlignment="Bottom" Margin="20,00,0,0"/>
 
         <ScrollViewer Grid.Row="1" Margin="0,14">
             <StackPanel Name="_stackPnlLevels" >
